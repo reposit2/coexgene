@@ -1,10 +1,10 @@
-# Demonstration: Prediction of gene expression levels based on DNA/RNA-binding sites
+# Demonstration: Inferring the cell type–specific functional roles of nucleic acid-binding proteins using deep learning on co-expression networks
 
 ---
 
 This repository provides a demonstration of predicting gene expression levels using DNA/RNA-binding sites derived from ChIP-seq data and gene co-expression data, as described in our study:
 
-**“Functional prediction of DNA/RNA-binding proteins using deep learning based on gene expression correlation.”**
+**“Inferring the cell type–specific functional roles of nucleic acid-binding proteins using deep learning on co-expression networks.”**
 [bioRxiv](https://doi.org/10.1101/2025.03.03.641203)
 
 In this analysis, the input to the deep learning model includes DNA- or RNA-binding sites derived from gene co-expression data.  
