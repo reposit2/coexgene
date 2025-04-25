@@ -2,7 +2,7 @@
 
 ---
 
-This repository provides a demonstration of predicting gene expression levels using DNA/RNA-binding sites derived from ChIP-seq data and gene co-expression data, as described in our study:
+This repository provides a demonstration of predicting gene expression levels using nucleic acid-binding sites derived from ChIP-seq data and gene co-expression data, as described in our study:
 
 **“Inferring the cell type–specific functional roles of nucleic acid-binding proteins using deep learning on co-expression networks.”**
 [bioRxiv](https://doi.org/10.1101/2025.03.03.641203)
