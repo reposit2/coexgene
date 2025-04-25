@@ -52,7 +52,7 @@ python deeplearning.py
 
 ### Outputs
 - Spearman’s correlation coefficients between actual and predicted gene expression levels
-- DeepLIFT contribution scores for DNA/RNA-binding sites involved in the prediction
+- DeepLIFT contribution scores for nucleic acid-binding sites involved in the prediction
 
 These outputs are saved in the `./train_out/` directory.
 
