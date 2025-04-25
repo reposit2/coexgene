@@ -35,6 +35,13 @@ Extract it with the following command:
 tar zxf data.tgz
 ```
 
+Make output directories with the following command:
+
+```bash
+mkdir -p train_out/3celltypes_hepg2
+mkdir -p train_out/3celltypes_k562
+```
+
 ### Run
 
 To execute the analysis, run the following script:
