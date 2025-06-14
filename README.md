@@ -27,7 +27,7 @@ Due to file size limitations on GitHub, the required dataset is hosted on Zenodo
 ### Requirements
 
 #### Data Files
-Download the dataset from [Zenodo](https://doi.org/10.5281/zenodo.8216164):
+Download the dataset from [Zenodo](https://zenodo.org/records/15661042):
 
 - `data.tgz`
 
@@ -57,7 +57,8 @@ python deeplearning.py
 - Spearman’s correlation coefficients between actual and predicted gene expression levels
 - DeepLIFT contribution scores for nucleic acid-binding sites
 
-These outputs are saved in the `./train_out/` directory.
+All output files are saved in the `./train_out/` directory.  
+A complete archive of the results (`train_out.tgz`) is available from [Zenodo](https://zenodo.org/records/15661042).
 
 ```
 cat ./train_out/3celltypes_hepg2/2025-04-25_14-43-19/test_data/cor_tbl.txt
@@ -85,17 +86,19 @@ Create an output directory:
 mkdir geneidlist
 ```
 
-To generate gene rankings based on DeepLIFT scores, edit the following scripts according to the embedded comments and run:
+To generate gene-level rankings based on DeepLIFT scores, edit the following scripts as instructed in the embedded comments and run:
 
 ```bash
 perl dlscore_ranksort.pl
 perl rankscore.pl
 ```
 
+The DeepLIFT score files used in this analysis are included in the `./train_out/3celltypes_k562_original` directory within the `train_out.tgz` archive.
+
 ### Outputs
 
-Ensembl gene IDs of putative regulatory target genes for each NABP, based on normalized DeepLIFT score rankings.
-Results are saved in the `./geneidlist/` directory.
+Ensembl gene IDs representing putative regulatory targets for each NABP, identified based on normalized DeepLIFT score rankings.  
+The results are saved in the `./geneidlist/` directory. A subset of these results is also included in the `geneidlist` directory of this repository.
 
 ---
 
@@ -105,10 +108,10 @@ Results are saved in the `./geneidlist/` directory.
 
 [PANTHER](https://pantherdb.org/)
 
-Steps:
+#### Steps:
 
 1. Upload your gene list (e.g., `K562_AKAP8_rank1_2024-10-08_03-21-22_50_gid.txt`).
-2. Select:
+2. Configure the following options:
    - **Organism:** `Homo sapiens`
    - **Analysis Type:** `Statistical overrepresentation test`
    - **Annotation Data Sets:**
@@ -117,8 +120,8 @@ Steps:
      - PANTHER GO-Slim Cellular Component
      - PANTHER GO-Slim Molecular Function
      - Reactome pathways
-3. Select a **reference list** by uploading: `fourcelltypeswithhffk562_fpkm_gid.txt`
-4. Choose:
+3. Upload a **reference list**, such as `fourcelltypeswithhffk562_fpkm_gid.txt` or `fourcelltypeswithhffhepg2_fpkm_gid.txt`, available in this repository.
+4. Select:
    - **Test Type:** Fisher’s Exact
    - **Correction:** False Discovery Rate (FDR)
 5. Click **Launch analysis**
