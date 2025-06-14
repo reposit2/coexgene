@@ -133,9 +133,12 @@ The results are saved in the `./geneidlist/` directory. A subset of these result
 
 #### Step 1: Convert Ensembl IDs to Gene Symbols
 
-Edit and run:
+Edit the file paths for `$infile` and `$outfile` in the script below, then run:
 
 ```bash
+mkdir chatgpt
+cd chatgpt
+wget https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_19/gencode.v19.annotation.gtf.gz
 perl genelist.pl
 ```
 
@@ -164,12 +167,10 @@ pandoc -s ChatGPT_genefunction.docx --wrap=none --extract-media=pandoc_out -t gf
 
 #### Step 5: Generate Summary Table
 
-Run the following script to parse the Markdown output and create a gene-function table:
+Edit the file paths for `$infile` and `$outfile` in the script below, then run the script to parse the Markdown output and create a gene-function table:
 
 ```bash
 perl gpt2table.pl
-# or
-python gpt2table.py
 ```
 
 Then move the file:
@@ -213,7 +214,9 @@ cd llm_evaluation_for_gene_set_interpretation
 pip install -r requirements.txt
 ```
 
-Run the script for reference search:
+
+Edit the configuration file `jsonFiles/reference_checking_revision_test.json` and update the file paths for `LLM_analysisFilePath` and `toSaveFilePath` in the script below.  
+Then, run the script to perform the reference search:
 
 ```bash
 python 4reference_search_and_validation_test.py
