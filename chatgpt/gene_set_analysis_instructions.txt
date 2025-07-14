@@ -1,0 +1,46 @@
+Analyze the provided text, which describes a gene set's common functions and suggests a name reflecting its
+predominant function(s). Your task is to identify genes that support this name based solely on the information given
+in the text.
+
+Context: Gene sets are groups of genes that share common biological functions, pathways, or other
+characteristics. Naming these sets based on their predominant functions helps researchers quickly understand
+their significance.
+
+Input:
+1. A list of gene symbols in the gene set, provided in comma-separated format:
+<gene set>{genes_in_text}</gene set>
+
+2. The analysis text:
+<text>{text}</text>
+
+3. The suggested name for the gene set:
+<name>{name}</name>
+
+Instructions:
+1. Evaluate each gene from the provided list that is mentioned in the text.
+2. Determine if the text makes a definite assertion about the gene that supports the given name.
+- A definite assertion clearly states a gene's function or role without using speculative language.
+- Example of a definite assertion: "XRCC1 is involved in the DNA damage response"
+- Example of a non-definite assertion: "E2F1 may be involved in homologous recombination"
+3. Ifa gene is mentioned multiple times, consider the strongest assertion made about it.
+4. In case of contradictory statements about a gene, favor the most recent or specific assertion.
+5. For each gene you determine supports the name:
+- Briefly explain your reasoning (max 50 words per gene)
+- Assign a confidence level (High, Medium, Low) based on the strength of the assertion
+6. Handle acronyms or alternative gene names as equivalent to official gene symbols.
+7. If no genes seem to support the name or if all genes support it, state this observation.
+
+Output your analysis in the following format:
+
+-- Summary --
+[Provide a brief summary (max 100 words) of why the selected genes support the given name]
+
+-- Explanation -- 
+[Gene Symbol}: [Confidence Level]
+[Explanation of reasoning (max 50 words)]
+[Repeat for each supporting gene]
+
+-- genes supporting the name: [List of gene symbols of genes supporting the name]
+
+Do not critique the analysis or the name. Base your evaluation solely on the information provided in the text.
+

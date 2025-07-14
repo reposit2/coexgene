@@ -1,0 +1,28 @@
+20250415
+conda activate llm_eval
+conda deactivate
+
+20250416
+conda activate llm_eval
+pandoc -s ChatGPT_genefunction.docx --wrap=none --extract-media=pandoc_out -t gfm -o ChatGPT_genefunction.md
+vi ChatGPT_genefunction.md
+
+./gpt2table.pl
+(./gpt2table.py # translated by ChatGPT)
+
+mv data/omics_revamped_LLM_ref_DF_test.tsv data/omics_revamped_LLM_ref_DF_test1.tsv
+mv data/omics_revamped_LLM_ref_DF_test_result.json data/omics_revamped_LLM_ref_DF_test_result1.json
+cp -p ChatGPT_genefunction_table.tsv data/omics_revamped_LLM_DF_test.tsv
+python 4reference_search_and_validation_test.py
+
+vi jsonFiles/reference_checking_revision_test.json
+mv data/omics_revamped_LLM_ref_DF_test.tsv data/omics_revamped_LLM_ref_DF_test2.tsv
+mv data/omics_revamped_LLM_ref_DF_test_result.json data/omics_revamped_LLM_ref_DF_test_result2.json
+cp -p data/omics_revamped_LLM_DF_test.tsv data/omics_revamped_LLM_DF_test2.tsv
+vi data/omics_revamped_LLM_DF_test.tsv
+python 4reference_search_and_validation_test.py
+
+cp -p data/omics_revamped_LLM_ref_DF_test.tsv data/omics_revamped_LLM_ref_DF_test2b.tsv
+cp -p data/omics_revamped_LLM_ref_DF_test_result.json data/omics_revamped_LLM_ref_DF_test_result2b.json
+cp -p data/omics_revamped_LLM_DF_test.tsv data/omics_revamped_LLM_DF_test2b.tsv
+
