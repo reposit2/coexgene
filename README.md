@@ -252,6 +252,11 @@ Unlike overrepresentation analysis, this approach uses the full ranked gene list
 
 ### Example command
 
+Set up environment:
+```bash
+pip install gseapy
+```
+Run GSEA:
 ```bash
 python gsea_rownorm_one_factor_bg_posneg.py \
   --factor PKM \
@@ -273,6 +278,7 @@ python gsea_rownorm_one_factor_bg_posneg.py \
   --jitter 1e-12 \
   --save_leading_edge \
   --outdir out_PKM_rowminmax_GSEA_reactomev2026_ensembl
+```
 
 ---
 
