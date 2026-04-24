@@ -1,10 +1,10 @@
-# Demonstration: Cell type–specific functions of nucleic acid-binding proteins revealed by deep learning on co-expression networks
+# Demonstration: Pathway redistribution reveals a shared signaling backbone and context-dependent regulatory modules in RNA-binding protein networks
 
 ---
 
 This repository demonstrates a deep learning approach for predicting gene expression levels using nucleic acid-binding site data (derived from ChIP-seq) and gene co-expression networks, as described in our study:
 
-**“Cell type–specific functions of nucleic acid-binding proteins revealed by deep learning on co-expression networks.”**
+**“Pathway redistribution reveals a shared signaling backbone and context-dependent regulatory modules in RNA-binding protein networks.”**
 [bioRxiv](https://doi.org/10.1101/2025.03.03.641203)
 
 In this analysis, DNA- or RNA-binding sites derived from co-expression data are used as inputs to the deep learning model.
@@ -110,7 +110,7 @@ The results are saved in the `./geneidlist/` directory. A subset of these result
 
 #### Steps:
 
-1. Upload your gene list (e.g., `K562_AKAP8_rank1_2024-10-08_03-21-22_50_gid.txt`).
+1. Upload your gene list (e.g., `K562_PKM_rank2_2024-10-08_03-21-22_332_gid.txt`).
 2. Configure the following options:
    - **Organism:** `Homo sapiens`
    - **Analysis Type:** `Statistical overrepresentation test`
@@ -222,6 +222,57 @@ Then, run the script to perform the reference search:
 python 4reference_search_and_validation_test.py
 less data/omics_revamped_LLM_ref_DF_test.tsv
 ```
+
+---
+
+## Functional Analysis: Gene Set Enrichment Analysis (GSEA) Using DeepLIFT Scores
+
+We provide an example of Gene Set Enrichment Analysis (GSEA) using DeepLIFT-derived gene rankings to quantify pathway-level redistribution of regulatory influence.
+
+This example corresponds to the analysis shown in **Figure 6**, **Table 4** and **Supplementary Table S7-S17**.
+
+### Overview
+
+Genes are ranked based on PKM-associated DeepLIFT scores comparing **K562** and **NPC** cells.  
+GSEA is then applied to identify pathways enriched toward either side of the ranked distribution.
+
+Unlike overrepresentation analysis, this approach uses the full ranked gene list and does not require an arbitrary cutoff.
+
+### Input
+
+- DeepLIFT score matrices (gene-wise, normalized):
+  - `DNA_3_norm_ensembl.csv` (K562)
+  - `DNA_2_norm_ensembl.csv` (NPC)
+- Orientation map:
+  - `orient_map.csv`
+- Background gene list:
+  - `fourcelltypeswithhffk562_fpkm_id.csv`
+- Gene set library (Reactome):
+  - `reactome/reactome_v2026_ensembl.gmt`
+
+### Example command
+
+```bash
+python gsea_rownorm_one_factor_bg_posneg.py \
+  --factor PKM \
+  --matrix_A ./DeepLIFT/DNA_3_norm_ensembl.csv \
+  --matrix_B ./DeepLIFT/DNA_2_norm_ensembl.csv \
+  --label_A K562 \
+  --label_B NPC \
+  --orient_map orient_map.csv \
+  --background fourcelltypeswithhffk562_fpkm_id.csv \
+  --library reactome/reactome_v2026_ensembl.gmt \
+  --min_size 10 \
+  --max_size 5000 \
+  --min_nonzero 3 \
+  --nperm 10000 \
+  --threads 7 \
+  --weight 1 \
+  --rownorm minmax \
+  --ranking_mode raw \
+  --jitter 1e-12 \
+  --save_leading_edge \
+  --outdir out_PKM_rowminmax_GSEA_reactomev2026_ensembl
 
 ---
 
