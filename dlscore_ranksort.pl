@@ -49,41 +49,38 @@ $outfile2 = "./3celltypes_k562/2024-10-08_03-21-22/DeepLIFT/DNA_3_rank.txt.gz";
 #$outfile2 = "./3celltypes_hepg2/2024-10-08_01-30-05/DeepLIFT/DNA_2_rank.txt.gz";
 
 open(IN,"$infile2");
-while($l = <IN>) {
-        chomp $l;
-        @list = split(/\,/,$l);
-        next if ($list[1] !~ /promoter_annot/);
-        $tid[$list[2]] = (split(/[\_\.]/,$list[1]))[2];
-}
+$l = <IN>;
+chomp $l;
 close(IN);
-
-for($i = 1;$i <= 1310;$i++) {
-        if ($header eq '') {
-                $header = $tid[$i];
-        } else {
-                $header .= "\,$tid[$i]";
-        }
+@tf = split(/\t/,$l);
+for($i = 1;$i <= $#tf;$i++) {
+	$tfname = (split(/\_/,$tf[$i]))[0];
+	if ($header eq '') {
+		$header .= "\t";
+	} else {
+		$header .= "\,";
+	}
+	$header .= $tfname;
 }
 
 open(IN,"zcat $infile1 |");
 while($l = <IN>) {
-    chomp $l;
-    @list = split(/\t/,$l);
-	@list2 = split(/\,/,$list[2]);
-	shift @list2;
-    $nlist2 = @list2;
-    $sum = 0;
-    for($i = 0;$i < $nlist2;$i++) {
-        $sum += abs($list2[$i]);
-    }
+        chomp $l;
+        @list = split(/\t/,$l);
+        @list2 = split(/\,/,$list[2]);
+        $nlist2 = @list2;
+        $sum = 0;
+        for($i = 0;$i < $nlist2;$i++) {
+                $sum += abs($list2[$i]);
+        }
 	if ($sum == 0) {
 		$c++;
 		next;
 	}
-    for($i = 0;$i < $nlist2;$i++) {
+        for($i = 0;$i < $nlist2;$i++) {
 		$t{$list[1]} .= ',' if ($t{$list[1]} ne '');
-        $t{$list[1]} .= ($list2[$i] / $sum);
-    }
+                $t{$list[1]} .= ($list2[$i] / $sum);
+        }
 }
 close(IN);
 

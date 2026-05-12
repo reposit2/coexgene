@@ -52,20 +52,20 @@ $outfile3 =~ s/\.txt\.gz$/_ensembl.csv/;
 # Read NABP names and create the header used in normalized matrix
 # ------------------------------------------------------------
 open(IN,"$infile2") or die "Cannot open $infile2: $!";
-while($l = <IN>) {
-        chomp $l;
-        @list = split(/\,/,$l);
-        next if ($list[1] !~ /promoter_annot/);
-        $tid[$list[2]] = (split(/[\_\.]/,$list[1]))[2];
-}
+$l = <IN>;
+chomp $l;
 close(IN);
 
-for($i = 1;$i <= 1310;$i++) {
-        if ($header eq '') {
-                $header = $tid[$i];
-        } else {
-                $header .= "\,$tid[$i]";
-        }
+@tf = split(/\t/,$l);
+$header = '';
+for($i = 1;$i <= $#tf;$i++) {
+	$tfname = (split(/\_/,$tf[$i]))[0];
+	if ($header eq '') {
+		$header .= "\t";
+	} else {
+		$header .= "\,";
+	}
+	$header .= $tfname;
 }
 
 # ------------------------------------------------------------
@@ -76,7 +76,6 @@ while($l = <IN>) {
 	chomp $l;
 	@list = split(/\t/,$l);
 	@list2 = split(/\,/,$list[2]);
-	shift @list2;
 	$nlist2 = @list2;
 	$sum = 0;
 
