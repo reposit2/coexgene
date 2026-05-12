@@ -89,7 +89,7 @@ mkdir geneidlist
 To generate gene-level rankings based on DeepLIFT scores, edit the following scripts as instructed in the embedded comments and run:
 
 ```bash
-perl dlscore_ranksort.pl
+perl dlscore_ranksort_with_ensembl_csv.pl
 perl rankscore.pl
 ```
 
