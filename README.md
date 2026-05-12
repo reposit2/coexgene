@@ -260,8 +260,8 @@ Run GSEA:
 ```bash
 python gsea_rownorm_one_factor_bg_posneg.py \
   --factor PKM \
-  --matrix_A ./DeepLIFT/DNA_3_norm_ensembl.csv \
-  --matrix_B ./DeepLIFT/DNA_2_norm_ensembl.csv \
+  --matrix_A ./3celltypes_k562/2024-10-08_03-21-22/DeepLIFT/DNA_3_norm_ensembl.csv \
+  --matrix_B ./3celltypes_k562/2024-10-08_03-21-22/DeepLIFT/DNA_2_norm_ensembl.csv \
   --label_A K562 \
   --label_B NPC \
   --orient_map orient_map.csv \
